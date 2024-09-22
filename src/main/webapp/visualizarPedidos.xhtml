@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Meus Pedidos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</h:head>
+<h:body>
+
+    <ui:include src="navbar.xhtml" />
+
+    <div class="container mt-5">
+        <h1>Meus Pedidos</h1>
+
+        <!-- Mensagens para feedback ao usuário -->
+        <h:messages globalOnly="true" styleClass="alert alert-info"/>
+
+        <h:form>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID do Pedido</th>
+                        <th>Data</th>
+                        <th>Valor Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ui:repeat value="#{pedidoBean.pedidos}" var="pedido">
+                        <tr>
+                            <td>#{pedido.id}</td>
+                            <td>#{pedido.data}</td>
+                            <td>R$ #{pedido.valorTotal}</td>
+                        </tr>
+                    </ui:repeat>
+                </tbody>
+            </table>
+        </h:form>
+    </div>
+
+</h:body>
+</html>

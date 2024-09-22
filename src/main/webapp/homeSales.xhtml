@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  
+  <h:head>
+      <title>Lista de Produtos</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  </h:head>
+  <h:body>
+      <!-- Incluir a navbar -->
+      <ui:include src="navbar.xhtml" />
+
+      <div class="container mt-5">
+          <h1>Produtos</h1>
+          <!-- Mensagens para feedback ao usuário -->
+          <h:messages globalOnly="true" styleClass="alert alert-info" />
+  
+          <h:form>
+              <div class="row">
+                  <ui:repeat value="#{produtoBean.produtos}" var="produto">
+                      <div class="col-md-4">
+                          <div class="card mb-4">
+                              <div class="card-body">
+                                  <h5 class="card-title">#{produto.nome}</h5>
+                                  <p class="card-text">Preço: R$ #{produto.preco}</p>
+                                  <p class="card-text">Quantidade Disponivel: #{produto.quantidade}</p>
+                                  <h6>Quantidade Desejada:</h6>
+                                  <!-- Input para quantidade com conversor numérico -->
+                                  <h:inputText class="form-control" value="#{produto.quant}">
+                                      <f:convertNumber integerOnly="true" />
+                                  </h:inputText>
+                                  <!-- Botão Adicionar com AJAX -->
+                                  <h:commandButton value="Adicionar ao Carrinho" 
+                                                   class="btn btn-primary mt-2" 
+                                                   action="#{produtoBean.adicionarAoCarrinho(produto, produto.quant)}">
+                                      <f:ajax execute="@form" render="@form"/>
+                                  </h:commandButton>
+                              </div>
+                          </div>
+                      </div>
+                  </ui:repeat>
+              </div>
+              <!-- Botão para visualizar o carrinho -->
+              <div class="mt-4">
+                  <h:commandButton value="Ver Carrinho" 
+                                   class="btn btn-success" 
+                                   action="carrinho.xhtml?faces-redirect=true"/>
+              </div>
+          </h:form>
+      </div>
+  </h:body>
+</html>

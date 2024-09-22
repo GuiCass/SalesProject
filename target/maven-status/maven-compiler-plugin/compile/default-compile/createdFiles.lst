@@ -1,0 +1,14 @@
+com\mysales\bean\ProdutoCadastroBean.class
+com\mysales\bean\LoginBean.class
+com\mysales\bean\ProdutoBean.class
+com\mysales\sales\JakartaRestConfiguration.class
+com\mysales\dao\ProdutoDAO.class
+com\mysales\entity\Pedido.class
+com\mysales\dao\PedidoDAO.class
+com\mysales\entity\Produtos.class
+com\mysales\bean\PedidoBean.class
+com\mysales\entity\ItemCarrinho.class
+com\mysales\entity\Usuario.class
+com\mysales\dao\UsuarioDAO.class
+com\mysales\bean\CadastroClientBean.class
+com\mysales\sales\resources\JakartaEE10Resource.class

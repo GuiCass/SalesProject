@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Cadastro de Produtos</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    </h:head>
+    <h:body>
+
+        <ui:include src="navbar.xhtml" />
+
+            <div class="container mt-5">
+                <h1>Cadastro de Produtos</h1>
+
+            <!-- Mensagens para feedback ao usuário -->
+            <h:messages globalOnly="true" styleClass="alert alert-info" />
+
+            <!-- Formulário para cadastrar novos produtos -->
+            <h:form>
+                <h3>Cadastrar Novo Produto</h3>
+                <div class="form-group">
+                    <h:outputLabel for="nome" value="Nome:" />
+                    <h:inputText id="nome" value="#{produtoCadastroBean.novoProduto.nome}" class="form-control" required="true"/>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="preco" value="Preço:" />
+                    <h:inputText id="preco" value="#{produtoCadastroBean.novoProduto.preco}" class="form-control" required="true">
+                        <f:convertNumber currencySymbol="R$" />
+                    </h:inputText>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="quantidade" value="Quantidade:" />
+                    <h:inputText id="quantidade" value="#{produtoCadastroBean.novoProduto.quantidade}" class="form-control" required="true"/>
+                </div>
+                <h:commandButton value="Cadastrar Produto" action="#{produtoCadastroBean.cadastrarProduto}" class="btn btn-primary" />
+            </h:form>
+
+            <h2 class="mt-5">Lista de Produtos Cadastrados</h2>
+            <h:form>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <th>Produto</th>
+                                </div>
+                                <div class="col-md-2">
+                                    <th>Preço Unitário</th>
+                                </div>
+                                <div class="col-md-2">
+                                    <th>Quantidade</th>
+                                </div>
+                                <div class="col-md-4">
+                                    <th>Ações</th>
+                                </div>
+                            </div>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat value="#{produtoCadastroBean.produtos}" var="produto">
+                            <tr>
+                                <td>
+                                    <h:inputText value="#{produto.nome}" required="true" class="form-control" />
+                                </td>
+                                <td>
+                                    <h:inputText value="#{produto.preco}" required="true" class="form-control">
+                                        <f:convertNumber currencySymbol="R$" />
+                                    </h:inputText>
+                                </td>
+                                <td>
+                                    <h:inputText value="#{produto.quantidade}" required="true" class="form-control" />
+                                </td>
+                                <td> 
+                                    <h:commandButton value="Salvar" action="#{produtoCadastroBean.atualizarProduto(produto)}" class="btn btn-success" />
+                                    <h:commandButton value="Deletar" action="#{produtoCadastroBean.deletarProduto(produto)}" class="btn btn-danger" />
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </tbody>
+                </table>
+            </h:form>
+        </div>
+
+    </h:body>
+</html>
